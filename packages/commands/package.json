@@ -1,0 +1,24 @@
+{
+  "name": "@llzcli/great-git-commands",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "LLZ66 <1228429428@qq.com>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "test": "node ./__tests__/commands.test.js"
+  },
+  "type": "module",
+  "dependencies": {
+    "@llzcli/great-git-command": "^0.0.0",
+    "execa": "^7.1.1"
+  }
+}
