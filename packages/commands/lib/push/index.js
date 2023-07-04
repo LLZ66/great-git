@@ -30,9 +30,7 @@ class PushCommand extends Command {
         commit:onlyCommit = false,
         force
     }]) {
-        if(!onlyCommit) {
-            await doAdd();
-        };
+        await doAdd(onlyCommit);
         await doCommit();
         await doPush(force);
         // const result = await execa('git log --branches --not --remotes');
