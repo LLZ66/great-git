@@ -20,6 +20,7 @@
   "dependencies": {
     "@llzcli/great-git-command": "^0.0.0",
     "@llzcli/utils": "^0.0.0",
-    "execa": "^7.1.1"
+    "execa": "^7.1.1",
+    "ora": "^6.3.1"
   }
 }
