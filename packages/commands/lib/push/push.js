@@ -2,8 +2,8 @@ import { execa } from 'execa'
 
 const PUSH_COMMAND = (force) => `git push ${force? '-f':''}`
 
-async function Init() {
-    const result = await execa(PUSH_COMMAND);
+async function Init(force) {
+    const result = await execa(PUSH_COMMAND(force));
     if(!result.failed) {
         log.info('push成功')
         return true
