@@ -46,7 +46,8 @@ const COMMIT_TYPE = [
         name: "first commit",
         value: "first commit"
     },
-]
+];
+const COMMIT_COMMAND = (commitMessage) => `git commit -m "${commitMessage}"`
 
 function validateFirstCommit(commitType) {
     return commitType === 'first commit'
@@ -105,8 +106,7 @@ async function Init() {
     const commitInfo = await getCommitInfo();
     const commitMessage = createCommitMessage(commitInfo);
     try {
-        const result = await execa(`git commit -m "${commitMessage}"`);
-        console.log(result);
+        await execa(COMMIT_COMMAND(commitMessage));
     }catch(err) {
         printErrorLog(err)
     }
