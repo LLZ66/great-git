@@ -14,6 +14,7 @@ function isConflct(err) {
 }
 
 async function handlePushError(err) {
+    console.log(isNeedPull(err), isConflct(err));
     if(isNeedPull(err)) {
         const needPull = await makeConfirm({
             message: `当前提交分支有更改,是否需要下拉最新代码(如果需要手动修改,请终止流程后手动修改)`
@@ -25,17 +26,6 @@ async function handlePushError(err) {
                 successMsg: '拉取成功',
                 errorCb: handlePushError
             })
-            // const spinner = ora('正在拉取代码...').start();
-            // try {
-            //     await execa(PULL_COMMAND);
-            //     spinner.stop();
-            //     log.info('拉取成功');
-            // }catch(err) {
-            //     spinner.stop();
-            //     handlePushError(err.stderr)
-            //     // spinner.stop();
-            //     // throw new Error(`执行git push失败: 原因是:${err}`)
-            // }
         }
     }
     if(isConflct(err)) {
@@ -51,15 +41,6 @@ async function Init(force) {
         successMsg: '提交成功',
         errorCb: handlePushError
     })
-    // const spinner = ora('正在提交代码...').start();
-    // try {
-    //     await execa(PUSH_COMMAND(force));
-    //     spinner.stop();
-    //     log.info('push成功');
-    // }catch(err) {
-    //     spinner.stop();
-    //     handlePushError(err.stderr)
-    // }
 };
 
 export default Init
