@@ -42,6 +42,10 @@ const COMMIT_TYPE = [
         name: "merge(代码合并)",
         value: "merge"
     },
+    {
+        name: "first commit",
+        value: "firstCommit"
+    },
 ]
 
 async function getCommitInfo() {
@@ -50,6 +54,13 @@ async function getCommitInfo() {
         message: "请选择提交类型",
         pageSize: COMMIT_TYPE.length
     });
+    if(commitType === 'firstCommit') {
+        return {
+            commitType,
+            commitScope:null,
+            commitSubject:null,
+        }
+    }
     const commitScope = await makeInput({
         defaultValue: "*",
         message: "请输入影响范围,默认*"
