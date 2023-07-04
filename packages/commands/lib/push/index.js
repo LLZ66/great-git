@@ -23,15 +23,25 @@ class PushCommand extends Command {
             ],
             [
                 '-f, --force', "强制提交",
+            ],
+            [
+                '-t, --type <type>', "提交类型",
+            ],
+            [
+                '-s, --scope <scope>', "提交影响范围",
+            ],
+            [
+                '-sb, --subject <subject>', "提交主题",
             ]
         ]
     }
     async action([{
         commit:onlyCommit = false,
-        force
+        force,
+        commitPreset
     }]) {
         await doAdd(onlyCommit);
-        await doCommit();
+        await doCommit(commitPreset);
         await doPush(force);
         // const result = await execa('git log --branches --not --remotes');
         

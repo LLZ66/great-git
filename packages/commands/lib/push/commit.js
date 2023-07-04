@@ -53,42 +53,55 @@ function validateFirstCommit(commitType) {
     return commitType === 'first commit'
 }
 
-async function getCommitInfo() {
-    const commitType = await makeList({
-        choices: COMMIT_TYPE,
-        message: "请选择提交类型",
-        pageSize: COMMIT_TYPE.length
-    });
-    if(validateFirstCommit(commitType)) {
-        return {
-            commitType,
-            commitScope:null,
-            commitSubject:null,
+async function getCommitInfo(type = '', scope = '', subject = '') {
+    let commitType = type;
+    let commitScope = scope;
+    let commitSubject = subject;
+    
+    if (!commitType) {
+        commitType = await makeList({
+            choices: COMMIT_TYPE,
+            message: "请选择提交类型",
+            pageSize: COMMIT_TYPE.length
+        });
+        
+        if (validateFirstCommit(commitType)) {
+            return {
+                commitType,
+                commitScope: null,
+                commitSubject: null
+            };
         }
     }
-    const commitScope = await makeInput({
-        defaultValue: "*",
-        message: "请输入影响范围,默认*"
-    });
-    const commitSubject = await makeInput({
-        message: "简短描述,不超过50个字符",
-        required: true,
-        validate: (value) => {
-            if(!value.length) {
-                return '请输入简短描述'
-            }else if(value.length > 50) {
-                return  `描述过长,为${value.length}个字符,请缩减`
+    
+    if (!commitScope) {
+        commitScope = await makeInput({
+            defaultValue: "*",
+            message: "请输入影响范围，默认*"
+        });
+    }
+    
+    if (!commitSubject) {
+        commitSubject = await makeInput({
+            message: "简短描述，不超过50个字符",
+            required: true,
+            validate: (value) => {
+                if (!value.length) {
+                    return '请输入简短描述';
+                } else if (value.length > 50) {
+                    return `描述过长，为${value.length}个字符，请缩减`;
+                } else {
+                    return true;
+                }
             }
-            else {
-                return true
-            }
-        }
-    });
+        });
+    }
+    
     return {
         commitType,
         commitScope,
-        commitSubject,
-    }
+        commitSubject
+    };
 }
 
 function createCommitMessage({
@@ -102,8 +115,8 @@ function createCommitMessage({
     return `${commitType}(${commitScope}):${commitSubject}`
 }
 
-async function Init() {
-    const commitInfo = await getCommitInfo();
+async function Init(commitPreset) {
+    const commitInfo = await getCommitInfo(commitPreset);
     const commitMessage = createCommitMessage(commitInfo);
     try {
         const result = await execa(COMMIT_COMMAND(commitMessage));
