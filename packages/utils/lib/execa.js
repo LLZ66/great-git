@@ -17,7 +17,7 @@ async function runCommand({
         successMsg && log.info(successMsg);
         successCb && successCb(result)
     }catch(err) {
-        console.log('失败', err.stderr);
+        console.log('失败', err);
         spinner.stop();
         errorMsg && log.error(errorMsg)
         errorCb && errorCb(err.stderr)
