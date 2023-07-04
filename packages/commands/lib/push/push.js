@@ -8,9 +8,8 @@ async function Init(force) {
     const spinner = ora('正在提交代码...').start();
     const result = await execa(PUSH_COMMAND(force));
     if(!result.failed) {
-        log.info('push成功');
-        spinner.clear();
         spinner.stop();
+        log.info('push成功');
         return true
     }else {
         printErrorLog(stderr);
