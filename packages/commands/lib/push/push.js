@@ -9,7 +9,7 @@ async function Init() {
         return true
     }else {
         printErrorLog(stderr);
-        throw new Error(`执行git push失败: 原因是:${stderr}`)
+        // throw new Error(`执行git push失败: 原因是:${stderr}`)
     }
 };
 
