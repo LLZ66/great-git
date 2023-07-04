@@ -44,9 +44,13 @@ const COMMIT_TYPE = [
     },
     {
         name: "first commit",
-        value: "firstCommit"
+        value: "first commit"
     },
 ]
+
+function validateFirstCommit(commitType) {
+    return commitType === 'first commit'
+}
 
 async function getCommitInfo() {
     const commitType = await makeList({
@@ -54,7 +58,7 @@ async function getCommitInfo() {
         message: "请选择提交类型",
         pageSize: COMMIT_TYPE.length
     });
-    if(commitType === 'firstCommit') {
+    if(validateFirstCommit(commitType)) {
         return {
             commitType,
             commitScope:null,
@@ -91,6 +95,9 @@ function createCommitMessage({
     commitScope,
     commitSubject
 }) {
+    if(validateFirstCommit(commitType)) {
+        return `${commitType}`
+    }
     return `${commitType}(${commitScope}):${commitSubject}`
 }
 
