@@ -13,6 +13,7 @@ async function runCommand({
     const spinner = ora(loading).start();
     try {
         const result = await execa(command);
+        console.log(result);
         spinner.stop();
         successMsg && log.info(successMsg);
         successCb && successCb(result)

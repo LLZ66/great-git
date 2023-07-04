@@ -53,7 +53,11 @@ function validateFirstCommit(commitType) {
     return commitType === 'first commit'
 }
 
-async function getCommitInfo(type = '', scope = '', subject = '') {
+async function getCommitInfo({
+    type = '',
+    scope = '',
+    subject = ''
+}) {
     let commitType = type;
     let commitScope = scope;
     let commitSubject = subject;
