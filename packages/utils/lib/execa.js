@@ -14,11 +14,11 @@ async function runCommand({
     try {
         const result = await execa(command);
         spinner.stop();
-        log.info(successMsg);
+        successMsg && log.info(successMsg);
         successCb && successCb(result)
     }catch(err) {
         spinner.stop();
-        log.error(errorMsg)
+        errorMsg && log.error(errorMsg)
         errorCb && errorCb(err.stderr)
     }
 }
