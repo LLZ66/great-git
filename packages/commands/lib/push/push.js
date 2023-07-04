@@ -15,10 +15,8 @@ async function Init(force) {
         spinner.stop();
         log.info('push成功');
     }catch(err) {
-        handlePushError(err)
-        // printErrorLog(err);
-        // spinner.stop();
-        // throw new Error(`执行git push失败: 原因是:${err}`)
+        spinner.stop();
+        handlePushError(err.stderr)
     }
 };
 
