@@ -8,7 +8,7 @@ async function Init() {
         log.info('push成功')
         return true
     }else {
-        printErrorLog(stderr);
+        // printErrorLog(stderr);
         // throw new Error(`执行git push失败: 原因是:${stderr}`)
     }
 };
