@@ -1,9 +1,10 @@
 import { execa } from 'execa';
 import { log, printErrorLog } from '@llzcli/utils'
 
+const ADD_COMMAND = 'git add .'
 
 async function Init() {
-    const result = await execa('git add .');
+    const result = await execa(ADD_COMMAND);
     if(!result.failed) {
         log.info('add阶段成功')
         return true

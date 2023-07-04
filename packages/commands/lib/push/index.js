@@ -2,6 +2,7 @@ import Command from '@llzcli/great-git-command';
 
 import doAdd from './add.js';
 import doCommit from './commit.js';
+import doPush from './push.js';
 
 class PushCommand extends Command {
     get command() {
@@ -27,6 +28,7 @@ class PushCommand extends Command {
             await doAdd();
         };
         await doCommit();
+        await doPush();
         // const result = await execa('git log --branches --not --remotes');
         
     }

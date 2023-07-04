@@ -106,7 +106,10 @@ async function Init() {
     const commitInfo = await getCommitInfo();
     const commitMessage = createCommitMessage(commitInfo);
     try {
-        await execa(COMMIT_COMMAND(commitMessage));
+        const result = await execa(COMMIT_COMMAND(commitMessage));
+        if(!result.failed) {
+            log.info('commit 阶段成功')
+        }
     }catch(err) {
         printErrorLog(err)
     }
