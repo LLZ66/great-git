@@ -83,7 +83,7 @@ async function getCommitInfo(type = '', scope = '', subject = '') {
     
     if (!commitSubject) {
         commitSubject = await makeInput({
-            message: "简短描述，不超过50个字符",
+            message: "简短描述,不超过50个字符",
             required: true,
             validate: (value) => {
                 if (!value.length) {
