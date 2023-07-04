@@ -20,7 +20,7 @@ async function runCommand({
         console.log('失败', err);
         spinner.stop();
         errorMsg && log.error(errorMsg)
-        errorCb && errorCb(err.stderr)
+        errorCb && errorCb(err)
     }
 }
 

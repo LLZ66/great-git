@@ -1,5 +1,3 @@
-import { execa } from 'execa';
-import ora from 'ora'
 import { log, makeConfirm, runCommand } from '@llzcli/utils'
 
 const PUSH_COMMAND = (force) => `git push ${force? '-f':''}`;
@@ -14,8 +12,7 @@ function isConflct(err) {
 }
 
 async function handlePushError(err) {
-    console.log(isNeedPull(err), isConflct(err));
-    if(isNeedPull(err)) {
+    if(isNeedPull(err.stderr)) {
         const needPull = await makeConfirm({
             message: `当前提交分支有更改,是否需要下拉最新代码(如果需要手动修改,请终止流程后手动修改)`
         });
@@ -28,8 +25,18 @@ async function handlePushError(err) {
             })
         }
     }
-    if(isConflct(err)) {
+    if(isConflct(err.stdout)) {
         log.info('当前提交有冲突,请手动合并冲突后再次提交');
+        // modification completed
+        const isMc = await makeConfirm({
+            message: `是否修改冲突完成`
+        });
+        if(isMc) {
+            runCommand({
+                command: "gg --type merge",
+                loading: '正在重新提交',
+            })
+        }
     };
     return true;
 }
