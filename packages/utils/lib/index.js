@@ -5,6 +5,7 @@ import isDebug from './isDebug.js';
 import { makeList, makeInput, makeConfirm } from './inquirer.js';
 import { getNpmInfo, getLastestVersion } from './npm.js';
 import request from './request.js';
+import { runCommand } from './execa.js';
 
 function printErrorLog(e, type) {
   if(isDebug) {
@@ -23,5 +24,6 @@ export {
   getNpmInfo,
   getLastestVersion,
   printErrorLog,
+  runCommand,
   request,
 }
