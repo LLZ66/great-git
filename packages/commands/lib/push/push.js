@@ -1,11 +1,21 @@
 import { execa } from 'execa';
 import ora from 'ora'
-import { log } from '@llzcli/utils'
+import { log, makeConfirm } from '@llzcli/utils'
 
-const PUSH_COMMAND = (force) => `git push ${force? '-f':''}`
+const PUSH_COMMAND = (force) => `git push ${force? '-f':''}`;
+const PULL_COMMAND = 'git pull'
 
-function handlePushError(err) {
-    console.log(err);
+function isNeedPull(err) {
+    return err.indexOf("hint: (e.g., 'git pull ...') before pushing again.") !== -1
+}
+
+async function handlePushError(err) {
+    if(isNeedPull(err)) {
+        const needPull = await makeConfirm({
+            message: `当前提交分支有更改,是否需要下拉最新代码(如果需要手动修改,请终止流程后手动修改)`
+        });
+        console.log(needPull);
+    }
 }
 
 async function Init(force) {
@@ -17,6 +27,12 @@ async function Init(force) {
     }catch(err) {
         spinner.stop();
         handlePushError(err.stderr)
+<<<<<<< HEAD
+=======
+        // printErrorLog(err);
+        // spinner.stop();
+        // throw new Error(`执行git push失败: 原因是:${err}`)
+>>>>>>> 2cf55a681867649d987742ef3f49205feaa0015f
     }
 };
 

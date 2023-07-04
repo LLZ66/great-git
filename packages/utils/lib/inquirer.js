@@ -32,6 +32,13 @@ export function makeList(params) {
     return make({...params})
 };
 
+export function makeConfirm(params) {
+    return make({
+        type: 'confirm',
+        ...params
+    })
+};
+
 export function makeInput(params) {
     return make({
         type: 'input',
