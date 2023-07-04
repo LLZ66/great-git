@@ -39,12 +39,6 @@ async function Init(force) {
     }catch(err) {
         spinner.stop();
         handlePushError(err.stderr)
-<<<<<<< HEAD
-=======
-        // printErrorLog(err);
-        // spinner.stop();
-        // throw new Error(`执行git push失败: 原因是:${err}`)
->>>>>>> 2cf55a681867649d987742ef3f49205feaa0015f
     }
 };
 
