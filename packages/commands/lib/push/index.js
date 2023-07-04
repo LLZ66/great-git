@@ -1,5 +1,7 @@
 import Command from '@llzcli/great-git-command';
-import { execa } from 'execa'
+
+import doAdd from './add.js';
+import doCommit from './commit.js';
 
 class PushCommand extends Command {
     get command() {
@@ -13,12 +15,20 @@ class PushCommand extends Command {
             isDefault : true
         }
     }
-    get alias() {
-        return 'p'
+    get options() {
+        return [
+            [
+                '-c, --commit', "commit当前的暂存更改,不执行add阶段"
+            ]
+        ]
     }
-    async action(params) {
-        const result = await execa('git log --branches --not --remotes');
-        console.log(result.stdout);
+    async action([{commit:onlyCommit = false}]) {
+        if(!onlyCommit) {
+            await doAdd();
+        };
+        await doCommit();
+        // const result = await execa('git log --branches --not --remotes');
+        
     }
 }
 
