@@ -1,4 +1,6 @@
-import { log, makeConfirm, runCommand } from '@llzcli/utils'
+import { log, makeConfirm, runCommand } from '@llzcli/utils';
+import doAdd from './add.js';
+import doCommit from './commit.js';
 
 const PUSH_COMMAND = (force) => `git push ${force? '-f':''}`;
 const PULL_COMMAND = 'git pull'
@@ -32,10 +34,11 @@ async function handlePushError(err) {
             message: `是否修改冲突完成`
         });
         if(isMc) {
-            runCommand({
-                command: "gg --type merge",
-                loading: '正在重新提交',
-            })
+            await doAdd(false);
+            await doCommit({
+                type: 'merge'
+            });
+            await Init();
         }
     };
     return true;

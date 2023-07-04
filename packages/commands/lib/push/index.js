@@ -38,7 +38,7 @@ class PushCommand extends Command {
     async action([{
         commit:onlyCommit = false,
         force,
-        commitPreset
+        ...commitPreset
     }]) {
         await doAdd(onlyCommit);
         await doCommit(commitPreset);
