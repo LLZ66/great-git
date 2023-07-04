@@ -1,6 +1,6 @@
 import { execa } from 'execa'
 
-const PUSH_COMMAND = 'git push'
+const PUSH_COMMAND = (force) => `git push ${force? '-f':''}`
 
 async function Init() {
     const result = await execa(PUSH_COMMAND);
@@ -8,8 +8,8 @@ async function Init() {
         log.info('push成功')
         return true
     }else {
-        // printErrorLog(stderr);
-        // throw new Error(`执行git push失败: 原因是:${stderr}`)
+        printErrorLog(stderr);
+        throw new Error(`执行git push失败: 原因是:${stderr}`)
     }
 };
 

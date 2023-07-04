@@ -19,16 +19,22 @@ class PushCommand extends Command {
     get options() {
         return [
             [
-                '-c, --commit', "commit当前的暂存更改,不执行add阶段"
+                '-c, --commit', "commit当前的暂存更改,不执行add阶段",
+            ],
+            [
+                '-f, --force', "强制提交",
             ]
         ]
     }
-    async action([{commit:onlyCommit = false}]) {
+    async action([{
+        commit:onlyCommit = false,
+        force
+    }]) {
         if(!onlyCommit) {
             await doAdd();
         };
         await doCommit();
-        await doPush();
+        await doPush(force);
         // const result = await execa('git log --branches --not --remotes');
         
     }
