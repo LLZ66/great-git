@@ -1,6 +1,6 @@
 {
   "name": "@llzcli/great-git-cli",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "> TODO: description",
   "author": "LLZ66 <1228429428@qq.com>",
   "homepage": "",
@@ -29,5 +29,8 @@
     "fs-extra": "^11.1.1",
     "import-local": "^3.1.0",
     "semver": "^7.5.3"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
