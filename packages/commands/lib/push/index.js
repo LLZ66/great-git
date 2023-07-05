@@ -1,4 +1,4 @@
-import Command from '@llzcli/great-git-command';
+import Command from '@llzcli/command';
 
 import doAdd from './add.js';
 import doCommit from './commit.js';

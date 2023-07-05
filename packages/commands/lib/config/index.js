@@ -1,7 +1,5 @@
-import Command from "@llzcli/great-git-command";
-import { makeEditor } from "@llzcli/utils";
+import Command from "@llzcli/command";
 import { getJsonConfig, writeJsonConfig } from '@llzcli/utils/lib/great-git/json.js';
-import fse from 'fs-extra'
 
 class ConfigCommand extends Command {
     get command() {
