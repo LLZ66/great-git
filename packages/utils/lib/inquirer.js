@@ -41,6 +41,13 @@ export function makeConfirm(params) {
     })
 };
 
+export function makeEditor(params) {
+    return make({
+        type: 'editor',
+        ...params
+    })
+};
+
 export function makeInput(params) {
     return make({
         type: 'input',

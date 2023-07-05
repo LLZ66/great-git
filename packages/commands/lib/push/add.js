@@ -1,7 +1,12 @@
 import { execa } from 'execa';
 import { log, printErrorLog } from '@llzcli/utils'
+import { getJsonConfig } from '@llzcli/utils/lib/great-git/json.js';
 
-const ADD_COMMAND = 'git add .'
+const {
+    add
+} = getJsonConfig();
+
+const ADD_COMMAND = add
 
 async function Init(skip) {
     if(!skip) {

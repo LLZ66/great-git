@@ -1,9 +1,15 @@
 import { log, makeConfirm, runCommand } from '@llzcli/utils';
+import { getJsonConfig } from '@llzcli/utils/lib/great-git/json.js';
 import doAdd from './add.js';
 import doCommit from './commit.js';
 
-const PUSH_COMMAND = (force) => `git push ${force? '-f':''}`;
-const PULL_COMMAND = 'git pull'
+const { 
+    push,
+    pull
+} = getJsonConfig();
+
+const PUSH_COMMAND = (force) => `${push} ${force? '-f':''}`;
+const PULL_COMMAND = pull
 
 function isNeedPull(err) {
     return err.indexOf("hint: (e.g., 'git pull ...') before pushing again.") !== -1
