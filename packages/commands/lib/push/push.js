@@ -20,6 +20,7 @@ function isConflct(err) {
 }
 
 async function handlePushError(err) {
+    console.log(err.stderr);
     if(isNeedPull(err.stderr)) {
         const needPull = await makeConfirm({
             message: `当前提交分支有更改,是否需要下拉最新代码(如果需要手动修改,请终止流程后手动修改)`
