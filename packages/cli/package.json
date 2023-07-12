@@ -1,6 +1,6 @@
 {
   "name": "@llzcli/great-git-cli",
-  "version": "0.0.8",
+  "version": "1.0.0",
   "description": "更方便 更快捷的使用git",
   "author": "LLZ66 <1228429428@qq.com>",
   "homepage": "",
@@ -16,7 +16,8 @@
   },
   "files": [
     "lib",
-    "bin"
+    "bin",
+    "public"
   ],
   "scripts": {
     "test": "node ./__tests__/cli.test.js"

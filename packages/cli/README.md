@@ -39,6 +39,6 @@ gg config set pull "git pull -r"
 在你提交发现目标分支有冲突或者新提交时，你都可以通过命令行的方式去一键重新提交，
 且如果有冲突 你的下一次提交commit type默认会选择merge，做到规范化提交,like this
 ##### 无冲突
-![image](../cli/public/noConflct.gif)
+![image](./public/noConflct.gif)
 ##### 有冲突
-![image](../cli/public/hasConflct.gif)
+![image](./public/hasConflct.gif)
