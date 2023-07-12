@@ -24,9 +24,9 @@ async function handleRePull() {
         command: PULL_COMMAND,
         loading: '正在拉取代码...',
         successMsg: '拉取成功,无冲突',
-        errorCb: (err) => {
+        errorCb: async (err) => {
             if(isConflct(err.stdout)) {
-                handleConflct()
+                await handleConflct()
             }else {
                 printErrorLog(err)
             }
@@ -46,20 +46,19 @@ async function handleConflct() {
     const isMc = await makeConfirm({
         message: `是否修改冲突完成`
     });
-    console.log(isMc, 'isMc');
-    if(isMc) {
-        await doAdd(false);
-        await doCommit({
-            type: 'merge'
-        });
-        await Init();
-    }
+    // if(isMc) {
+    //     await doAdd(false);
+    //     await doCommit({
+    //         type: 'merge'
+    //     });
+    //     await Init();
+    // }
 }
 
 async function handlePushError(err) {
     if(isNeedPull(err.stderr)) {
         const needPull = await makeConfirm({
-            message: `当前提交分支有更改,是否需要下拉最新代码(如果需要手动修改,请终止流程后手动修改1`
+            message: `当前提交分支有更改,是否需要下拉最新代码(如果需要手动修改,请终止流程后手动修改`
         });
         if(needPull) {
             await handleRePull()
