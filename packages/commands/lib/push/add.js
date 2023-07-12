@@ -1,5 +1,5 @@
 import { execa } from 'execa';
-import { log, printErrorLog } from '@llzcli/utils'
+import { log, printErrorLog, runCommand } from '@llzcli/utils'
 import { getJsonConfig } from '@llzcli/utils/lib/great-git/json.js';
 
 const {
@@ -8,16 +8,18 @@ const {
 
 const ADD_COMMAND = add
 
+
 async function Init(skip) {
     if(!skip) {
-        const result = await execa(ADD_COMMAND);
-        if(!result.failed) {
-            log.info('add阶段成功')
-            return true
-        }else {
-            printErrorLog(stderr);
-            throw new Error(`执行git add .失败: 原因是:${stderr}`)
-        }
+        await runCommand({
+            command: ADD_COMMAND,
+            loading: '正在ADD代码...',
+            successMsg: '代码ADD成功',
+            errorCb: (err) => {
+                printErrorLog(err.stderr);
+                throw new Error(`执行git add .失败: 原因是:${err.stderr}`)
+            }
+        });
     }
 }
 
