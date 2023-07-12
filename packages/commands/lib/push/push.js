@@ -24,6 +24,14 @@ async function handleRePull() {
         command: PULL_COMMAND,
         loading: '正在拉取代码...',
         successMsg: '拉取成功,无冲突',
+        successCb: async () => {
+            const needRepush = await makeConfirm({
+                message: `是否需要继续提交`
+            });
+            if(needRepush) {
+                await Init();
+            }
+        },
         errorCb: async (err) => {
             if(isConflct(err.stdout)) {
                 await handleConflct()
@@ -32,12 +40,7 @@ async function handleRePull() {
             }
         }
     });
-    const needRepush = await makeConfirm({
-        message: `是否需要继续提交`
-    });
-    if(needRepush) {
-        await Init();
-    }
+
 }
 
 async function handleConflct() {
