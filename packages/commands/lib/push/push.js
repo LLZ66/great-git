@@ -24,6 +24,14 @@ async function handleRePull() {
         command: PULL_COMMAND,
         loading: '正在拉取代码...',
         successMsg: '拉取成功,无冲突',
+        successCb: async () => {
+            const needRepush = await makeConfirm({
+                message: `是否需要继续提交`
+            });
+            if(needRepush) {
+                await Init();
+            }
+        },
         errorCb: async (err) => {
             if(isConflct(err.stdout)) {
                 await handleConflct()
@@ -32,20 +40,15 @@ async function handleRePull() {
             }
         }
     });
-    const needRepush = await makeConfirm({
-        message: `是否需要继续提交`
-    });
-    if(needRepush) {
-        await Init();
-    }
+
 }
 
 async function handleConflct() {
     log.info('当前提交有冲突,请手动合并冲突后再次提交');
     // modification completed
-    const isMc = await makeConfirm({
-        message: `是否修改冲突完成`
-    });
+    // const isMc = await makeConfirm({
+    //     message: `是否修改冲突完成`
+    // });
     // if(isMc) {
     //     await doAdd(false);
     //     await doCommit({
