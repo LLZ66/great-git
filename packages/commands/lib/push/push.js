@@ -1,4 +1,4 @@
-import { log, makeConfirm, runCommand } from '@llzcli/utils';
+import { log, makeConfirm, printErrorLog, runCommand } from '@llzcli/utils';
 import { getJsonConfig } from '@llzcli/utils/lib/great-git/json.js';
 import doAdd from './add.js';
 import doCommit from './commit.js';
@@ -24,7 +24,13 @@ async function handleRePull() {
         command: PULL_COMMAND,
         loading: '正在拉取代码...',
         successMsg: '拉取成功,无冲突',
-        errorCb: handlePushError
+        errorCb: (err) => {
+            if(isConflct(err.stdout)) {
+                handleConflct()
+            }else {
+                printErrorLog(err)
+            }
+        }
     });
     const needRepush = await makeConfirm({
         message: `是否需要继续提交`
@@ -41,28 +47,24 @@ async function handleConflct() {
         message: `是否修改冲突完成`
     });
     console.log(isMc, 'isMc');
-    // if(isMc) {
-    //     await doAdd(false);
-    //     await doCommit({
-    //         type: 'merge'
-    //     });
-    //     await Init();
-    // }
+    if(isMc) {
+        await doAdd(false);
+        await doCommit({
+            type: 'merge'
+        });
+        await Init();
+    }
 }
 
 async function handlePushError(err) {
-    console.log(err, 'err');
     if(isNeedPull(err.stderr)) {
         const needPull = await makeConfirm({
-            message: `当前提交分支有更改,是否需要下拉最新代码(如果需要手动修改,请终止流程后手动修改)`
+            message: `当前提交分支有更改,是否需要下拉最新代码(如果需要手动修改,请终止流程后手动修改1`
         });
         if(needPull) {
             await handleRePull()
         }
     }
-    if(isConflct(err.stdout)) {
-        await handleConflct()
-    };
     return true;
 }
 
