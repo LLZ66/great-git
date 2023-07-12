@@ -1,9 +1,10 @@
 {
   "name": "@llzcli/great-git-cli",
   "version": "0.0.7",
-  "description": "> TODO: description",
+  "description": "更方便 更快捷的使用git",
   "author": "LLZ66 <1228429428@qq.com>",
   "homepage": "",
+  "repository": "https://github.com/LLZ66/great-git",
   "license": "ISC",
   "main": "lib/cli.js",
   "directories": {
@@ -20,6 +21,10 @@
   "scripts": {
     "test": "node ./__tests__/cli.test.js"
   },
+  "keywords": [
+    "git",
+    "commander"
+  ],
   "type": "module",
   "dependencies": {
     "@llzcli/great-git-commands": "latest",
