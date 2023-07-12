@@ -43,9 +43,9 @@ async function handleRePull() {
 async function handleConflct() {
     log.info('当前提交有冲突,请手动合并冲突后再次提交');
     // modification completed
-    const isMc = await makeConfirm({
-        message: `是否修改冲突完成`
-    });
+    // const isMc = await makeConfirm({
+    //     message: `是否修改冲突完成`
+    // });
     // if(isMc) {
     //     await doAdd(false);
     //     await doCommit({
