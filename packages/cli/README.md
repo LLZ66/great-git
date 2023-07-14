@@ -42,3 +42,6 @@ gg config set pull "git pull -r"
 ![image](./public/noConflct.gif)
 ##### 有冲突
 ![image](./public/hasConflct.gif)
+
+#### 积极维护中
+本工具正在积极维护中 如有ISSUE或BUG 请提交到上方GIT仓库中 作者会在看到时第一时间解决~
