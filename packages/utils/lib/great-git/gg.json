@@ -1,1 +1,14 @@
-{"add":"git add .","pull":"git pull","push":"git push"}
+{
+    "add": "git add .",
+    "pull": "git pull",
+    "push": "git push",
+    "alias": {
+        "st": "git status",
+        "sp": "git stash pop",
+        "ss": "git stash save",
+        "ci": "git commit",
+        "co": "git checkout",
+        "ft": "git fetch",
+        "fh": "git fetch"
+    }
+}

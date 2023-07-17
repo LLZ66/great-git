@@ -43,5 +43,27 @@ gg config set pull "git pull -r"
 ##### 有冲突
 ![image](./public/hasConflct.gif)
 
+
+#### *新功能
+现在 great-git默认提供部分初始化的git alias
+以上是alias列表
+``` json
+    "alias": {
+        "st": "git status",
+        "sp": "git stash pop",
+        "ss": "git stash save",
+        "ci": "git commit",
+        "co": "git checkout",
+        "ft": "git fetch",
+        "fh": "git fetch"
+    }
+```
+你也可以通过
+``` shell
+gg config alias aliasName "aliasCommand"
+```
+对你的gg alias进行配置
+(本功能的初心是在电脑没有配置alias的情况下(例如新电脑), 通过gg的默认alias配置即可实现git alias的使用,所以如果公认好的alias list可以一起参与建设此功能)
+
 #### 积极维护中
 本工具正在积极维护中 如有ISSUE或BUG 请提交到上方GIT仓库中 作者会在看到时第一时间解决~

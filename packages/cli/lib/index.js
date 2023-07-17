@@ -26,7 +26,8 @@ function entry() {
     .name(Object.keys(pkg.bin)[0])
     .usage("<command> [options]")
     .version(pkg.version)
-    .option("-d, --debug", "是否开启调试模式", false);
+    .option("-d, --debug", "是否开启调试模式", false)
+    .option("-v, --version", "查看当前版本");
   InitCommands(program)
   program.hook('preAction', preAction);
   program.parse(process.argv)
