@@ -6,7 +6,7 @@ class ConfigCommand extends Command {
         return "config [configType] [configName] [target]"
     }
     get description() {
-        return "set config item"
+        return "set config item (configType === 'alias' || 'set')"
     }
     get options() {
         return [
@@ -22,7 +22,15 @@ class ConfigCommand extends Command {
                 ...jsonConfig,
                 [configName]: target
             }
-        };
+        }else if(type === 'alias' && configName && target) {
+            jsonConfig = {
+                ...jsonConfig,
+                alias: {
+                    ...jsonConfig.alias,
+                    [configName]: target
+                }
+            }
+        }
         writeJsonConfig(jsonConfig);
         // if(options['editor']) {
         //     const result = await makeEditor({

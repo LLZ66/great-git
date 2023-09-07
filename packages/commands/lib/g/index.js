@@ -6,10 +6,10 @@ import doPush from './push.js';
 
 class PushCommand extends Command {
     get command() {
-        return 'push'
+        return 'g'
     }
     get description() {
-        return "push"
+        return "一键push(默认命令)"
     }
     get cmdOptions() {
         return {
