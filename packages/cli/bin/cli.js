@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import importLocal from 'import-local';
-import entry from '../lib/index.js'
+import entry from '../lib/index.js';
 
 entry(process.argv)
 

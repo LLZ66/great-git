@@ -12,7 +12,8 @@
     "test": "__tests__"
   },
   "bin": {
-    "gg": "bin/cli.js"
+    "gg": "bin/cli.js",
+    "tt": "bin/tt.js"
   },
   "files": [
     "lib",
